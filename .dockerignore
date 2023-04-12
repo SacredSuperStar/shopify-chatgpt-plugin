@@ -1,0 +1,9 @@
+# Ignore files that are already ignored by git
+.gitignore
+
+tests/
+local-server/
+*.md
+*.pyc
+.dockerignore
+Dockerfile

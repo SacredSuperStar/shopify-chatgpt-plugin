@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_model": "shopify_store_admin",
+  "name_for_human": "Shopify Store Admin Plugin",
+  "description_for_model": "Plugin for looking up information about a Shopify store, including orders and customers. Use it to find answers to questions about a store.",
+  "description_for_human": "Look up information about your store.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "http://localhost:8000/.well-known/openapi.yaml",
+    "has_user_authentication": false
+  },
+  "logo_url": "http://localhost:8000/.well-known/logo.png",
+  "contact_email": "support@yourstore.com", 
+  "legal_info_url": "https://yourstore.com/legal-info"
+}

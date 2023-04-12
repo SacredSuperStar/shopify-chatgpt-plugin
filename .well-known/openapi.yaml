@@ -1,0 +1,652 @@
+openapi: 3.0.2
+info:
+  title: Shopify Store Admin Plugin API
+  description: An API for querying and looking up information about a Shopify store's orders and customers.
+  version: 1.0.0
+servers:
+  - url: https://your-app-url
+paths:
+  /orders:
+    get:
+      summary: Get Orders
+      operationId: get_orders_orders_get
+      parameters:
+        - required: false
+          schema:
+            title: Attribution App Id
+            type: string
+          name: attribution_app_id
+          in: query
+        - required: false
+          schema:
+            title: Created At Max
+            type: string
+            format: date-time
+          name: created_at_max
+          in: query
+        - required: false
+          schema:
+            title: Created At Min
+            type: string
+            format: date-time
+          name: created_at_min
+          in: query
+        - required: false
+          schema:
+            title: Fields
+            type: string
+            default: id,buyer_accepts_marketing,cancel_reason,cancelled_at,closed_at,confirmed,created_at,total_price,updated_at
+          name: fields
+          in: query
+        - required: false
+          schema:
+            title: Financial Status
+            type: string
+            default: any
+          name: financial_status
+          in: query
+        - required: false
+          schema:
+            title: Fulfillment Status
+            type: string
+            default: any
+          name: fulfillment_status
+          in: query
+        - required: false
+          schema:
+            title: Ids
+            type: string
+          name: ids
+          in: query
+        - required: false
+          schema:
+            title: Limit
+            type: integer
+            default: 10
+          name: limit
+          in: query
+        - required: false
+          schema:
+            title: Processed At Max
+            type: string
+            format: date-time
+          name: processed_at_max
+          in: query
+        - required: false
+          schema:
+            title: Processed At Min
+            type: string
+            format: date-time
+          name: processed_at_min
+          in: query
+        - required: false
+          schema:
+            title: Since Id
+            type: integer
+          name: since_id
+          in: query
+        - required: false
+          schema:
+            title: Status
+            type: string
+            default: open
+          name: status
+          in: query
+        - required: false
+          schema:
+            title: Updated At Max
+            type: string
+            format: date-time
+          name: updated_at_max
+          in: query
+        - required: false
+          schema:
+            title: Updated At Min
+            type: string
+            format: date-time
+          name: updated_at_min
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrdersResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - HTTPBearer: []
+  /orders/count:
+    get:
+      summary: Get Orders Count
+      operationId: get_orders_count_orders_count_get
+      parameters:
+        - required: false
+          schema:
+            title: Created At Max
+            type: string
+            format: date-time
+          name: created_at_max
+          in: query
+        - required: false
+          schema:
+            title: Created At Min
+            type: string
+            format: date-time
+          name: created_at_min
+          in: query
+        - required: false
+          schema:
+            title: Financial Status
+            type: string
+            default: any
+          name: financial_status
+          in: query
+        - required: false
+          schema:
+            title: Fulfillment Status
+            type: string
+            default: any
+          name: fulfillment_status
+          in: query
+        - required: false
+          schema:
+            title: Status
+            type: string
+            default: open
+          name: status
+          in: query
+        - required: false
+          schema:
+            title: Updated At Max
+            type: string
+            format: date-time
+          name: updated_at_max
+          in: query
+        - required: false
+          schema:
+            title: Updated At Min
+            type: string
+            format: date-time
+          name: updated_at_min
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - HTTPBearer: []
+  /orders/{order_id}:
+    get:
+      summary: Get Order
+      operationId: get_order_orders__order_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Order Id
+            type: integer
+          name: order_id
+          in: path
+        - required: false
+          schema:
+            title: Fields
+            type: string
+            default: id,buyer_accepts_marketing,cancel_reason,cancelled_at,closed_at,confirmed,created_at,total_price,updated_at
+          name: fields
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - HTTPBearer: []
+  /customers/count:
+    get:
+      summary: Get Customers Count
+      operationId: get_customers_count_customers_count_get
+      parameters:
+        - required: false
+          schema:
+            title: Created At Max
+            type: string
+            format: date-time
+          name: created_at_max
+          in: query
+        - required: false
+          schema:
+            title: Created At Min
+            type: string
+            format: date-time
+          name: created_at_min
+          in: query
+        - required: false
+          schema:
+            title: Updated At Max
+            type: string
+            format: date-time
+          name: updated_at_max
+          in: query
+        - required: false
+          schema:
+            title: Updated At Min
+            type: string
+            format: date-time
+          name: updated_at_min
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - HTTPBearer: []
+  /customers/search:
+    get:
+      summary: Search Customers
+      operationId: search_customers_customers_search_get
+      parameters:
+        - required: false
+          schema:
+            title: Fields
+            type: string
+            default: id,accepts_marketing,created_at,updated_at,orders_count,state,total_spent,tags,accepts_marketing_updated_at
+          name: fields
+          in: query
+        - required: false
+          schema:
+            title: Limit
+            type: integer
+            default: 10
+          name: limit
+          in: query
+        - required: false
+          schema:
+            title: Order Field
+            type: string
+            default: last_order_date
+          name: order_field
+          in: query
+        - required: false
+          schema:
+            title: Order Direction
+            type: string
+            default: DESC
+          name: order_direction
+          in: query
+        - required: false
+          schema:
+            title: Query
+            type: string
+          name: query
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomersResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - HTTPBearer: []
+  /customers/{customer_id}:
+    get:
+      summary: Get Customer
+      operationId: get_customer_customers__customer_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Customer Id
+            type: integer
+          name: customer_id
+          in: path
+        - required: false
+          schema:
+            title: Fields
+            type: string
+            default: id,accepts_marketing,created_at,updated_at,orders_count,state,total_spent,tags,accepts_marketing_updated_at
+          name: fields
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - HTTPBearer: []
+components:
+  schemas:
+    CountResponse:
+      title: CountResponse
+      required:
+        - count
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+    Customer:
+      title: Customer
+      type: object
+      properties:
+        id:
+          title: Id
+          type: integer
+        email:
+          title: Email
+          type: string
+        accepts_marketing:
+          title: Accepts Marketing
+          type: boolean
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        updated_at:
+          title: Updated At
+          type: string
+          format: date-time
+        orders_count:
+          title: Orders Count
+          type: integer
+        state:
+          title: State
+          type: string
+        total_spent:
+          title: Total Spent
+          type: string
+        last_order_id:
+          title: Last Order Id
+          type: integer
+        note:
+          title: Note
+          type: string
+        verified_email:
+          title: Verified Email
+          type: boolean
+        tags:
+          title: Tags
+          type: string
+        last_order_name:
+          title: Last Order Name
+          type: string
+        accepts_marketing_updated_at:
+          title: Accepts Marketing Updated At
+          type: string
+          format: date-time
+        marketing_opt_in_level:
+          title: Marketing Opt In Level
+          type: string
+        email_marketing_consent:
+          $ref: '#/components/schemas/EmailMarketingConsent'
+        sms_marketing_consent:
+          $ref: '#/components/schemas/SmsMarketingConsent'
+    CustomerResponse:
+      title: CustomerResponse
+      required:
+        - customer
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/Customer'
+    CustomersResponse:
+      title: CustomersResponse
+      required:
+        - customers
+      type: object
+      properties:
+        customers:
+          title: Customers
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer'
+    DiscountCode:
+      title: DiscountCode
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        amount:
+          title: Amount
+          type: string
+        type:
+          title: Type
+          type: string
+    EmailMarketingConsent:
+      title: EmailMarketingConsent
+      type: object
+      properties:
+        state:
+          title: State
+          type: string
+        opt_in_level:
+          title: Opt In Level
+          type: string
+        consent_updated_at:
+          title: Consent Updated At
+          type: string
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    Order:
+      title: Order
+      type: object
+      properties:
+        id:
+          title: Id
+          type: integer
+        customer:
+          $ref: '#/components/schemas/Customer'
+        buyer_accepts_marketing:
+          title: Buyer Accepts Marketing
+          type: boolean
+        cancel_reason:
+          title: Cancel Reason
+          type: string
+        cancelled_at:
+          title: Cancelled At
+          type: string
+        closed_at:
+          title: Closed At
+          type: string
+        confirmed:
+          title: Confirmed
+          type: boolean
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        currency:
+          title: Currency
+          type: string
+        current_subtotal_price:
+          title: Current Subtotal Price
+          type: string
+        current_total_discounts:
+          title: Current Total Discounts
+          type: string
+        current_total_duties_set:
+          title: Current Total Duties Set
+          type: string
+        current_total_price:
+          title: Current Total Price
+          type: string
+        current_total_tax:
+          title: Current Total Tax
+          type: string
+        discount_codes:
+          title: Discount Codes
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscountCode'
+        estimated_taxes:
+          title: Estimated Taxes
+          type: boolean
+        financial_status:
+          title: Financial Status
+          type: string
+        fulfillment_status:
+          title: Fulfillment Status
+          type: string
+        name:
+          title: Name
+          type: string
+        note:
+          title: Note
+          type: string
+        processed_at:
+          title: Processed At
+          type: string
+          format: date-time
+        source_url:
+          title: Source Url
+          type: string
+        subtotal_price:
+          title: Subtotal Price
+          type: string
+        tags:
+          title: Tags
+          type: string
+        taxes_included:
+          title: Taxes Included
+          type: boolean
+        total_discounts:
+          title: Total Discounts
+          type: string
+        total_line_items_price:
+          title: Total Line Items Price
+          type: string
+        total_outstanding:
+          title: Total Outstanding
+          type: string
+        total_price:
+          title: Total Price
+          type: string
+        total_tax:
+          title: Total Tax
+          type: string
+        total_tip_received:
+          title: Total Tip Received
+          type: string
+        total_weight:
+          title: Total Weight
+          type: integer
+        updated_at:
+          title: Updated At
+          type: string
+          format: date-time
+        refunds:
+          title: Refunds
+          type: array
+          items: {}
+    OrderResponse:
+      title: OrderResponse
+      required:
+        - order
+      type: object
+      properties:
+        order:
+          $ref: '#/components/schemas/Order'
+    OrdersResponse:
+      title: OrdersResponse
+      required:
+        - orders
+      type: object
+      properties:
+        orders:
+          title: Orders
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+    SmsMarketingConsent:
+      title: SmsMarketingConsent
+      type: object
+      properties:
+        state:
+          title: State
+          type: string
+        opt_in_level:
+          title: Opt In Level
+          type: string
+        consent_updated_at:
+          title: Consent Updated At
+          type: string
+        consent_collected_from:
+          title: Consent Collected From
+          type: string
+    ValidationError:
+      title: ValidationError
+      required:
+        - loc
+        - msg
+        - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer
